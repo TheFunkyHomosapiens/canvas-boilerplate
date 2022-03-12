@@ -90,58 +90,78 @@
 /*!**************************!*\
   !*** ./src/js/canvas.js ***!
   \**************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./src/js/utils.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_utils__WEBPACK_IMPORTED_MODULE_0__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-
 var canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d');
-canvas.width = innerWidth;
-canvas.height = innerHeight;
-var mouse = {
-  x: innerWidth / 2,
-  y: innerHeight / 2
-};
-var colors = ['#2185C5', '#7ECEFD', '#FFF6E5', '#FF7F66']; // Event Listeners
+canvas.width = 1024;
+canvas.height = 576;
+var gravity = 0.3;
 
-addEventListener('mousemove', function (event) {
-  mouse.x = event.clientX;
-  mouse.y = event.clientY;
-});
-addEventListener('resize', function () {
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
-  init();
-}); // Objects
+var Player = /*#__PURE__*/function () {
+  function Player() {
+    _classCallCheck(this, Player);
 
-var _Object = /*#__PURE__*/function () {
-  function Object(x, y, radius, color) {
-    _classCallCheck(this, Object);
-
-    this.x = x;
-    this.y = y;
-    this.radius = radius;
-    this.color = color;
+    this.position = {
+      x: 100,
+      y: 450
+    };
+    this.velocity = {
+      x: 0,
+      y: 0
+    };
+    this.width = 30;
+    this.height = 30;
   }
 
-  _createClass(Object, [{
+  _createClass(Player, [{
     key: "draw",
     value: function draw() {
-      c.beginPath();
-      c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-      c.fillStyle = this.color;
-      c.fill();
-      c.closePath();
+      c.fillStyle = 'red';
+      c.fillRect(this.position.x, this.position.y, this.width, this.height);
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      this.draw();
+      this.position.y += this.velocity.y;
+      this.position.x += this.velocity.x;
+
+      if (this.position.y + this.height + this.velocity.y <= canvas.height - 75) {
+        this.velocity.y += gravity;
+      } else {
+        this.velocity.y = 0;
+      }
+    }
+  }]);
+
+  return Player;
+}();
+
+var Ground = /*#__PURE__*/function () {
+  function Ground() {
+    _classCallCheck(this, Ground);
+
+    this.position = {
+      x: 0,
+      y: 500
+    };
+    this.width = 2000;
+    this.height = 150;
+  }
+
+  _createClass(Ground, [{
+    key: "draw",
+    value: function draw() {
+      c.fillStyle = 'green';
+      c.fillRect(this.position.x, this.position.y, this.width, this.height);
     }
   }, {
     key: "update",
@@ -150,59 +170,82 @@ var _Object = /*#__PURE__*/function () {
     }
   }]);
 
-  return Object;
-}(); // Implementation
+  return Ground;
+}();
 
-
-var objects;
-
-function init() {
-  objects = [];
-
-  for (var i = 0; i < 400; i++) {// objects.push()
+var player = new Player();
+var ground = new Ground();
+var keys = {
+  right: {
+    pressed: false
+  },
+  left: {
+    pressed: false
   }
-} // Animation Loop
-
+};
 
 function animate() {
   requestAnimationFrame(animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
-  c.fillText('HTML CANVAS BOILERPLATE', mouse.x, mouse.y); // objects.forEach(object => {
-  //  object.update()
-  // })
+  player.update();
+  ground.update();
+
+  if (keys.right.pressed) {
+    player.velocity.x = 5;
+  } else if (keys.left.pressed) {
+    player.velocity.x = -5;
+  } else player.velocity.x = 0;
 }
 
-init();
 animate();
+addEventListener('keydown', function (_ref) {
+  var key = _ref.key;
 
-/***/ }),
+  switch (key) {
+    case "a":
+      console.log('left');
+      keys.left.pressed = true;
+      break;
 
-/***/ "./src/js/utils.js":
-/*!*************************!*\
-  !*** ./src/js/utils.js ***!
-  \*************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+    case "d":
+      console.log('right');
+      keys.right.pressed = true;
+      break;
 
-function randomIntFromRange(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
+    case "w":
+      console.log('up');
+      player.velocity.y -= 10;
+      break;
 
-function randomColor(colors) {
-  return colors[Math.floor(Math.random() * colors.length)];
-}
+    case "s":
+      console.log('down');
+      break;
+  }
 
-function distance(x1, y1, x2, y2) {
-  var xDist = x2 - x1;
-  var yDist = y2 - y1;
-  return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
-}
+  console.log(keys.left.pressed);
+});
+addEventListener('keyup', function (_ref2) {
+  var key = _ref2.key;
 
-module.exports = {
-  randomIntFromRange: randomIntFromRange,
-  randomColor: randomColor,
-  distance: distance
-};
+  switch (key) {
+    case "a":
+      keys.left.pressed = false;
+      break;
+
+    case "d":
+      keys.right.pressed = false;
+      break;
+
+    case "w":
+      player.velocity.y -= 0;
+      break;
+
+    case "s":
+      break;
+  }
+
+  console.log(keys.left.pressed);
+});
 
 /***/ })
 

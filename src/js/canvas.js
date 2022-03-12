@@ -1,73 +1,132 @@
-import utils from './utils'
-
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
-canvas.width = innerWidth
-canvas.height = innerHeight
+canvas.width = 1024
+canvas.height = 576
+ 
+const gravity = 0.3
 
-const mouse = {
-  x: innerWidth / 2,
-  y: innerHeight / 2
+class Player {
+    constructor() {
+        this.position = {
+            x: 100,
+            y: 450
+        }
+        this.velocity = {
+            x: 0,
+            y: 0
+        }
+        this.width = 30
+        this.height = 30
+    }
+
+    draw() {
+        c.fillStyle = 'red'
+        c.fillRect(this.position.x, this.position.y, this.width, this.height)
+    }
+
+    update() {
+        this.draw()
+        this.position.y += this.velocity.y
+        this.position.x += this.velocity.x
+
+        if (this.position.y + this.height + this.velocity.y <= canvas.height-75) {
+            this.velocity.y += gravity
+        } else {
+            this.velocity.y = 0
+        }
+    }
 }
 
-const colors = ['#2185C5', '#7ECEFD', '#FFF6E5', '#FF7F66']
+class Ground {
+    constructor() {
+        this.position = {
+            x: 0,
+            y: 500
+        }
+        this.width = 2000
+        this.height = 150
+    }
 
-// Event Listeners
-addEventListener('mousemove', (event) => {
-  mouse.x = event.clientX
-  mouse.y = event.clientY
-})
+    draw() {
+        c.fillStyle = 'green'
+        c.fillRect(this.position.x, this.position.y, this.width, this.height)
+    }
 
-addEventListener('resize', () => {
-  canvas.width = innerWidth
-  canvas.height = innerHeight
-
-  init()
-})
-
-// Objects
-class Object {
-  constructor(x, y, radius, color) {
-    this.x = x
-    this.y = y
-    this.radius = radius
-    this.color = color
-  }
-
-  draw() {
-    c.beginPath()
-    c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false)
-    c.fillStyle = this.color
-    c.fill()
-    c.closePath()
-  }
-
-  update() {
-    this.draw()
-  }
+    update() {
+        this.draw()
+    }
 }
 
-// Implementation
-let objects
-function init() {
-  objects = []
+const player = new Player()
+const ground = new Ground()
 
-  for (let i = 0; i < 400; i++) {
-    // objects.push()
-  }
+const keys = {
+    right: {
+        pressed: false
+    },
+    left: {
+        pressed: false
+    },
 }
 
-// Animation Loop
+
 function animate() {
-  requestAnimationFrame(animate)
-  c.clearRect(0, 0, canvas.width, canvas.height)
+    requestAnimationFrame(animate)
+    c.clearRect(0, 0, canvas.width, canvas.height)
+    player.update()
+    ground.update()
 
-  c.fillText('HTML CANVAS BOILERPLATE', mouse.x, mouse.y)
-  // objects.forEach(object => {
-  //  object.update()
-  // })
+    if (keys.right.pressed) {
+        player.velocity.x = 5
+    } else if (keys.left.pressed) {
+        player.velocity.x = -5
+    } else player.velocity.x = 0
 }
 
-init()
 animate()
+
+addEventListener('keydown', ({ key }) => {
+    switch (key) {
+        case "a":
+            console.log('left')
+            keys.left.pressed = true
+            break
+        
+        case "d":
+            console.log('right')
+            keys.right.pressed = true
+            break
+
+        case "w":
+            console.log('up')
+            player.velocity.y -= 10
+            break
+            
+        case "s":
+            console.log('down')
+            break
+    }
+    console.log(keys.left.pressed)
+})
+
+addEventListener('keyup', ({ key }) => {
+    switch (key) {
+        case "a":
+            keys.left.pressed = false
+            break
+        
+        case "d":
+            keys.right.pressed = false
+            break
+
+        case "w":
+            player.velocity.y -= 0
+            break
+            
+        case "s":
+    
+            break
+    }
+    console.log(keys.left.pressed)
+})
