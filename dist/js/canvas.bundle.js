@@ -125,6 +125,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/img/spriteStandRight.png":
+/*!**************************************!*\
+  !*** ./src/img/spriteStandRight.png ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "01e8f15e899155c68950c40e0a6b8df0.png");
+
+/***/ }),
+
 /***/ "./src/js/canvas.js":
 /*!**************************!*\
   !*** ./src/js/canvas.js ***!
@@ -137,6 +150,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _img_platform_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../img/platform.png */ "./src/img/platform.png");
 /* harmony import */ var _img_hills_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../img/hills.png */ "./src/img/hills.png");
 /* harmony import */ var _img_background_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../img/background.png */ "./src/img/background.png");
+/* harmony import */ var _img_spriteStandRight_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../img/spriteStandRight.png */ "./src/img/spriteStandRight.png");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -146,11 +160,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+
 var canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d');
 canvas.width = 1024;
 canvas.height = 576;
-var gravity = 0.25;
+var gravity = 0.2;
 
 var Player = /*#__PURE__*/function () {
   function Player() {
@@ -158,25 +173,32 @@ var Player = /*#__PURE__*/function () {
 
     this.position = {
       x: 100,
-      y: 420
+      y: 300
     };
     this.velocity = {
       x: 0,
       y: 0
     };
-    this.width = 30;
-    this.height = 30;
+    this.width = 66;
+    this.height = 150;
+    this.image = createImage(_img_spriteStandRight_png__WEBPACK_IMPORTED_MODULE_3__["default"]);
+    this.frames = 0;
   }
 
   _createClass(Player, [{
     key: "draw",
     value: function draw() {
-      c.fillStyle = 'red';
-      c.fillRect(this.position.x, this.position.y, this.width, this.height);
+      c.drawImage(this.image, 177 * this.frames, 0, 177, 400, this.position.x, this.position.y, this.width, this.height);
     }
   }, {
     key: "update",
     value: function update() {
+      this.frames++;
+
+      if (this.frames > 28) {
+        this.frames = 0;
+      }
+
       this.draw();
       this.position.y += this.velocity.y;
       this.position.x += this.velocity.x;
@@ -300,7 +322,7 @@ var player = new Player(); //const ground = new Ground()
 
 var platforms = [new Platform({
   x: 300,
-  y: 270,
+  y: 250,
   image: platformImage
 }), new Platform({
   x: 1100,
@@ -311,7 +333,7 @@ var platforms = [new Platform({
   y: 220,
   image: platformImage
 }), new Platform({
-  x: 2750,
+  x: 2850,
   y: 180,
   image: platformImage
 }), new Platform({
@@ -335,11 +357,11 @@ var platforms = [new Platform({
   y: 460,
   image: platformImage
 }), new Platform({
-  x: 2690,
+  x: 2890,
   y: 460,
   image: platformImage
 }), new Platform({
-  x: 3268,
+  x: 3668,
   y: 460,
   image: platformImage
 })];

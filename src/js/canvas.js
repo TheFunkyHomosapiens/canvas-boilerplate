@@ -1,6 +1,7 @@
 import platform from '../img/platform.png'
 import hills from '../img/hills.png'
 import background from '../img/background.png'
+import spriteStandRight from '../img/spriteStandRight.png'
 
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
@@ -8,28 +9,38 @@ const c = canvas.getContext('2d')
 canvas.width = 1024
 canvas.height = 576
  
-const gravity = 0.25
+const gravity = 0.2
 
 class Player {
     constructor() {
         this.position = {
             x: 100,
-            y: 420
+            y: 300
         }
         this.velocity = {
             x: 0,
             y: 0
         }
-        this.width = 30
-        this.height = 30
+        this.width = 66
+        this.height = 150
+        this.image = createImage(spriteStandRight)
+        this.frames = 0
     }
 
     draw() {
-        c.fillStyle = 'red'
-        c.fillRect(this.position.x, this.position.y, this.width, this.height)
+        c.drawImage(
+            this.image, 177 * this.frames, 0, 177, 400,
+            this.position.x, 
+            this.position.y, 
+            this.width, 
+            this.height
+        )
     }
 
     update() {
+        this.frames++
+        if (this.frames > 28) 
+            {this.frames = 0}
         this.draw()
         this.position.y += this.velocity.y
         this.position.x += this.velocity.x
@@ -116,12 +127,12 @@ const platformImage = createImage(platform)
 
 const player = new Player()
 //const ground = new Ground()
-const platforms = [new Platform({x: 300, y: 270, image: platformImage}), new Platform({x: 1100, y: 180, image: platformImage}),
-        new Platform({x: 1900, y: 220, image: platformImage}), new Platform({x: 2750, y: 180, image: platformImage}), 
+const platforms = [new Platform({x: 300, y: 250, image: platformImage}), new Platform({x: 1100, y: 180, image: platformImage}),
+        new Platform({x: 1900, y: 220, image: platformImage}), new Platform({x: 2850, y: 180, image: platformImage}), 
         new Platform({x: -200, y: 460, image: platformImage}), new Platform({x: 378, y: 460, image: platformImage}), 
         new Platform({x: 956, y: 460, image: platformImage}), new Platform({x: 1534, y: 460, image: platformImage}), 
-        new Platform({x: 2112, y: 460, image: platformImage}), new Platform({x: 2690, y: 460, image: platformImage}),
-        new Platform({x: 3268, y: 460, image: platformImage})
+        new Platform({x: 2112, y: 460, image: platformImage}), new Platform({x: 2890, y: 460, image: platformImage}),
+        new Platform({x: 3668, y: 460, image: platformImage})
     ]
 
 const backgroundObject = [
