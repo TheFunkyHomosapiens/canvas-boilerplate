@@ -214,7 +214,12 @@ function animate() {
     player.velocity.x = 5;
   } else if (keys.left.pressed) {
     player.velocity.x = -5;
-  } else player.velocity.x = 0;
+  } else player.velocity.x = 0; // Kolizja z platformą
+
+
+  if (player.position.y + player.height <= platform.position.y && player.position.y + player.height + player.velocity.y >= platform.position.y && player.position.x + player.width >= platform.position.x && player.position.x <= platform.position.x + platform.width) {
+    player.velocity.y = 0;
+  }
 }
 
 animate();
