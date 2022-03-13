@@ -86,6 +86,32 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/img/background.png":
+/*!********************************!*\
+  !*** ./src/img/background.png ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "072d51bcc9c09311d4c2a6708b05bddc.png");
+
+/***/ }),
+
+/***/ "./src/img/hills.png":
+/*!***************************!*\
+  !*** ./src/img/hills.png ***!
+  \***************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "cfffe4c371f5e11d372b398a87c51dd0.png");
+
+/***/ }),
+
 /***/ "./src/img/platform.png":
 /*!******************************!*\
   !*** ./src/img/platform.png ***!
@@ -109,11 +135,15 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _img_platform_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../img/platform.png */ "./src/img/platform.png");
+/* harmony import */ var _img_hills_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../img/hills.png */ "./src/img/hills.png");
+/* harmony import */ var _img_background_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../img/background.png */ "./src/img/background.png");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
 
 
 var canvas = document.querySelector('canvas');
@@ -188,6 +218,33 @@ var Platform = /*#__PURE__*/function () {
 
   return Platform;
 }();
+
+var GenericObject = /*#__PURE__*/function () {
+  function GenericObject(_ref2) {
+    var x = _ref2.x,
+        y = _ref2.y,
+        image = _ref2.image;
+
+    _classCallCheck(this, GenericObject);
+
+    this.position = {
+      x: x,
+      y: y
+    };
+    this.image = image;
+    this.width = image.width;
+    this.height = image.height;
+  }
+
+  _createClass(GenericObject, [{
+    key: "draw",
+    value: function draw() {
+      c.drawImage(this.image, this.position.x, this.position.y);
+    }
+  }]);
+
+  return GenericObject;
+}();
 /*class Ground {
     constructor() {
         this.position = {
@@ -205,55 +262,68 @@ var Platform = /*#__PURE__*/function () {
 }*/
 
 
-var image = new Image();
-image.src = _img_platform_png__WEBPACK_IMPORTED_MODULE_0__["default"];
-console.log(image);
+function createImage(imageSrc) {
+  var image = new Image();
+  image.src = imageSrc;
+  return image;
+}
+
+var platformImage = createImage(_img_platform_png__WEBPACK_IMPORTED_MODULE_0__["default"]);
 var player = new Player(); //const ground = new Ground()
 
 var platforms = [new Platform({
   x: 300,
   y: 270,
-  image: image
+  image: platformImage
 }), new Platform({
   x: 1100,
   y: 180,
-  image: image
+  image: platformImage
 }), new Platform({
   x: 1900,
   y: 220,
-  image: image
+  image: platformImage
 }), new Platform({
   x: 2750,
   y: 180,
-  image: image
+  image: platformImage
 }), new Platform({
   x: -200,
   y: 460,
-  image: image
+  image: platformImage
 }), new Platform({
-  x: image.width - 202,
+  x: 378,
   y: 460,
-  image: image
+  image: platformImage
 }), new Platform({
-  x: image.width + 376,
+  x: 956,
   y: 460,
-  image: image
+  image: platformImage
 }), new Platform({
-  x: image.width + 954,
+  x: 1534,
   y: 460,
-  image: image
+  image: platformImage
 }), new Platform({
-  x: image.width + 1532,
+  x: 2112,
   y: 460,
-  image: image
+  image: platformImage
 }), new Platform({
-  x: image.width + 2110,
+  x: 2690,
   y: 460,
-  image: image
+  image: platformImage
 }), new Platform({
-  x: image.width + 2688,
+  x: 3268,
   y: 460,
-  image: image
+  image: platformImage
+})];
+var genericObjects = [new GenericObject({
+  x: -1,
+  y: -1,
+  image: createImage(_img_background_png__WEBPACK_IMPORTED_MODULE_2__["default"])
+}), new GenericObject({
+  x: -1,
+  y: -1,
+  image: createImage(_img_hills_png__WEBPACK_IMPORTED_MODULE_1__["default"])
 })];
 var keys = {
   right: {
@@ -272,6 +342,9 @@ function animate() {
   requestAnimationFrame(animate);
   c.fillStyle = 'white';
   c.fillRect(0, 0, canvas.width, canvas.height);
+  genericObjects.forEach(function (genericObjects) {
+    genericObjects.draw();
+  });
   platforms.forEach(function (platform) {
     platform.draw();
   });
@@ -318,8 +391,8 @@ function animate() {
 }
 
 animate();
-addEventListener('keydown', function (_ref2) {
-  var key = _ref2.key;
+addEventListener('keydown', function (_ref3) {
+  var key = _ref3.key;
 
   switch (key) {
     case "a":
@@ -345,8 +418,8 @@ addEventListener('keydown', function (_ref2) {
 
   console.log(keys.left.pressed);
 });
-addEventListener('keyup', function (_ref3) {
-  var key = _ref3.key;
+addEventListener('keyup', function (_ref4) {
+  var key = _ref4.key;
 
   switch (key) {
     case "a":
