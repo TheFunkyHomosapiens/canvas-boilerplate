@@ -146,12 +146,15 @@ var Player = /*#__PURE__*/function () {
 }();
 
 var Platform = /*#__PURE__*/function () {
-  function Platform() {
+  function Platform(_ref) {
+    var x = _ref.x,
+        y = _ref.y;
+
     _classCallCheck(this, Platform);
 
     this.position = {
-      x: 150,
-      y: 380
+      x: x,
+      y: y
     };
     this.width = 200;
     this.height = 20;
@@ -193,12 +196,27 @@ var Ground = /*#__PURE__*/function () {
 
 var player = new Player();
 var ground = new Ground();
-var platform = new Platform();
+var platforms = [new Platform({
+  x: 200,
+  y: 350
+}), new Platform({
+  x: 500,
+  y: 280
+}), new Platform({
+  x: 900,
+  y: 320
+}), new Platform({
+  x: 1200,
+  y: 380
+})];
 var keys = {
   right: {
     pressed: false
   },
   left: {
+    pressed: false
+  },
+  jump: {
     pressed: false
   }
 };
@@ -206,7 +224,9 @@ var keys = {
 function animate() {
   requestAnimationFrame(animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
-  platform.draw();
+  platforms.forEach(function (platform) {
+    platform.draw();
+  });
   player.update();
   ground.draw();
 
@@ -218,26 +238,33 @@ function animate() {
     player.velocity.x = 0;
 
     if (keys.right.pressed) {
-      platform.position.x -= 5;
+      platforms.forEach(function (platform) {
+        platform.position.x -= 5;
+      });
     } else if (keys.left.pressed) {
-      platform.position.x += 5;
+      platforms.forEach(function (platform) {
+        platform.position.x += 5;
+      });
     }
   } // Kolizja z platformą od góry i boków
 
 
-  if (player.position.y + player.height <= platform.position.y && player.position.y + player.height + player.velocity.y >= platform.position.y && player.position.x + player.width >= platform.position.x && player.position.x <= platform.position.x + platform.width) {
-    player.velocity.y = 0;
-  } // Kolizja z platformą od dołu i boków
+  platforms.forEach(function (platform) {
+    if (player.position.y + player.height <= platform.position.y && player.position.y + player.height + player.velocity.y >= platform.position.y && player.position.x + player.width >= platform.position.x && player.position.x <= platform.position.x + platform.width) {
+      player.velocity.y = 0;
+    }
+  }); // Kolizja z platformą od dołu i boków
 
-
-  if (player.position.y >= platform.position.y && player.position.y + player.velocity.y <= platform.position.y && player.position.x + player.width >= platform.position.x && player.position.x <= platform.position.x + platform.width) {
-    player.velocity.y = 5;
-  }
+  platforms.forEach(function (platform) {
+    if (player.position.y >= platform.position.y && player.position.y + player.velocity.y <= platform.position.y && player.position.x + player.width >= platform.position.x && player.position.x <= platform.position.x + platform.width) {
+      player.velocity.y = 5;
+    }
+  });
 }
 
 animate();
-addEventListener('keydown', function (_ref) {
-  var key = _ref.key;
+addEventListener('keydown', function (_ref2) {
+  var key = _ref2.key;
 
   switch (key) {
     case "a":
@@ -252,6 +279,7 @@ addEventListener('keydown', function (_ref) {
 
     case "w":
       console.log('up');
+      keys.jump.pressed = true;
       player.velocity.y -= 10;
       break;
 
@@ -262,8 +290,8 @@ addEventListener('keydown', function (_ref) {
 
   console.log(keys.left.pressed);
 });
-addEventListener('keyup', function (_ref2) {
-  var key = _ref2.key;
+addEventListener('keyup', function (_ref3) {
+  var key = _ref3.key;
 
   switch (key) {
     case "a":
@@ -275,6 +303,7 @@ addEventListener('keyup', function (_ref2) {
       break;
 
     case "w":
+      keys.jump.pressed = false;
       player.velocity.y -= 0;
       break;
 

@@ -39,10 +39,10 @@ class Player {
 }
 
 class Platform {
-    constructor() {
+    constructor({x, y}) {
         this.position = {
-            x: 150,
-            y: 380
+            x,
+            y
         }
         this.width = 200
         this.height = 20
@@ -72,7 +72,8 @@ class Ground {
 
 const player = new Player()
 const ground = new Ground()
-const platform = new Platform()
+const platforms = [new Platform({x: 200, y: 350}), new Platform({x: 500, y: 280}),
+        new Platform({x: 900, y: 320}), new Platform({x: 1200, y: 380})]
 
 const keys = {
     right: {
@@ -81,6 +82,9 @@ const keys = {
     left: {
         pressed: false
     },
+    jump: {
+        pressed: false
+    }
 }
 
 
@@ -88,7 +92,10 @@ function animate() {
     requestAnimationFrame(animate)
     c.clearRect(0, 0, canvas.width, canvas.height)
 
-    platform.draw()
+    platforms.forEach(platform => {
+        platform.draw()
+    })
+    
     player.update()
     ground.draw()
 
@@ -100,27 +107,36 @@ function animate() {
         player.velocity.x = 0
 
         if (keys.right.pressed) {
-            platform.position.x -= 5
+            platforms.forEach(platform => {
+                platform.position.x -= 5
+            })
+            
         } else if (keys.left.pressed) {
-            platform.position.x += 5
+            platforms.forEach(platform => {
+                platform.position.x += 5 
+            })
         }
     }
 
     // Kolizja z platformą od góry i boków
-    if (player.position.y + player.height <= platform.position.y
-        && player.position.y + player.height + player.velocity.y >= platform.position.y
-        && player.position.x + player.width >= platform.position.x
-        && player.position.x <= platform.position.x + platform.width) {
-        player.velocity.y = 0
-    }
+    platforms.forEach(platform => {
+        if (player.position.y + player.height <= platform.position.y
+            && player.position.y + player.height + player.velocity.y >= platform.position.y
+            && player.position.x + player.width >= platform.position.x
+            && player.position.x <= platform.position.x + platform.width) {
+            player.velocity.y = 0
+        }
+    })
 
     // Kolizja z platformą od dołu i boków
-    if (player.position.y >= platform.position.y
-        && player.position.y + player.velocity.y <= platform.position.y
-        && player.position.x + player.width >= platform.position.x
-        && player.position.x <= platform.position.x + platform.width) {
-        player.velocity.y = 5
-    }
+    platforms.forEach(platform => {
+        if (player.position.y >= platform.position.y
+            && player.position.y + player.velocity.y <= platform.position.y
+            && player.position.x + player.width >= platform.position.x
+            && player.position.x <= platform.position.x + platform.width) {
+            player.velocity.y = 5
+        }
+    })
 }
 
 animate()
@@ -139,6 +155,7 @@ addEventListener('keydown', ({ key }) => {
 
         case "w":
             console.log('up')
+            keys.jump.pressed = true
             player.velocity.y -= 10
             break
             
@@ -160,6 +177,7 @@ addEventListener('keyup', ({ key }) => {
             break
 
         case "w":
+            keys.jump.pressed = false
             player.velocity.y -= 0
             break
             
