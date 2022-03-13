@@ -86,24 +86,41 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/img/platform.png":
+/*!******************************!*\
+  !*** ./src/img/platform.png ***!
+  \******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "ffab39d3487de561be1a081fcfb3806d.png");
+
+/***/ }),
+
 /***/ "./src/js/canvas.js":
 /*!**************************!*\
   !*** ./src/js/canvas.js ***!
   \**************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _img_platform_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../img/platform.png */ "./src/img/platform.png");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+
 var canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d');
 canvas.width = 1024;
 canvas.height = 576;
-var gravity = 0.3;
+var gravity = 0.25;
 
 var Player = /*#__PURE__*/function () {
   function Player() {
@@ -111,7 +128,7 @@ var Player = /*#__PURE__*/function () {
 
     this.position = {
       x: 100,
-      y: 450
+      y: 420
     };
     this.velocity = {
       x: 0,
@@ -134,7 +151,7 @@ var Player = /*#__PURE__*/function () {
       this.position.y += this.velocity.y;
       this.position.x += this.velocity.x;
 
-      if (this.position.y + this.height + this.velocity.y <= canvas.height - 75) {
+      if (this.position.y + this.height + this.velocity.y <= canvas.height) {
         this.velocity.y += gravity;
       } else {
         this.velocity.y = 0;
@@ -148,7 +165,8 @@ var Player = /*#__PURE__*/function () {
 var Platform = /*#__PURE__*/function () {
   function Platform(_ref) {
     var x = _ref.x,
-        y = _ref.y;
+        y = _ref.y,
+        image = _ref.image;
 
     _classCallCheck(this, Platform);
 
@@ -156,58 +174,86 @@ var Platform = /*#__PURE__*/function () {
       x: x,
       y: y
     };
-    this.width = 200;
-    this.height = 20;
+    this.image = image;
+    this.width = image.width;
+    this.height = image.height;
   }
 
   _createClass(Platform, [{
     key: "draw",
     value: function draw() {
-      c.fillStyle = 'green';
-      c.fillRect(this.position.x, this.position.y, this.width, this.height);
+      c.drawImage(this.image, this.position.x, this.position.y);
     }
   }]);
 
   return Platform;
 }();
-
-var Ground = /*#__PURE__*/function () {
-  function Ground() {
-    _classCallCheck(this, Ground);
-
-    this.position = {
-      x: 0,
-      y: 500
-    };
-    this.width = 2000;
-    this.height = 150;
-  }
-
-  _createClass(Ground, [{
-    key: "draw",
-    value: function draw() {
-      c.fillStyle = 'green';
-      c.fillRect(this.position.x, this.position.y, this.width, this.height);
+/*class Ground {
+    constructor() {
+        this.position = {
+            x: 0,
+            y: 500
+        }
+        this.width = 2000
+        this.height = 150
     }
-  }]);
 
-  return Ground;
-}();
+    draw() {
+        c.fillStyle = 'green'
+        c.fillRect(this.position.x, this.position.y, this.width, this.height)
+    }
+}*/
 
-var player = new Player();
-var ground = new Ground();
+
+var image = new Image();
+image.src = _img_platform_png__WEBPACK_IMPORTED_MODULE_0__["default"];
+console.log(image);
+var player = new Player(); //const ground = new Ground()
+
 var platforms = [new Platform({
-  x: 200,
-  y: 350
+  x: 300,
+  y: 270,
+  image: image
 }), new Platform({
-  x: 500,
-  y: 280
+  x: 1100,
+  y: 180,
+  image: image
 }), new Platform({
-  x: 900,
-  y: 320
+  x: 1900,
+  y: 220,
+  image: image
 }), new Platform({
-  x: 1200,
-  y: 380
+  x: 2750,
+  y: 180,
+  image: image
+}), new Platform({
+  x: -200,
+  y: 460,
+  image: image
+}), new Platform({
+  x: image.width - 202,
+  y: 460,
+  image: image
+}), new Platform({
+  x: image.width + 376,
+  y: 460,
+  image: image
+}), new Platform({
+  x: image.width + 954,
+  y: 460,
+  image: image
+}), new Platform({
+  x: image.width + 1532,
+  y: 460,
+  image: image
+}), new Platform({
+  x: image.width + 2110,
+  y: 460,
+  image: image
+}), new Platform({
+  x: image.width + 2688,
+  y: 460,
+  image: image
 })];
 var keys = {
   right: {
@@ -224,12 +270,12 @@ var scrollOffset = 0;
 
 function animate() {
   requestAnimationFrame(animate);
-  c.clearRect(0, 0, canvas.width, canvas.height);
+  c.fillStyle = 'white';
+  c.fillRect(0, 0, canvas.width, canvas.height);
   platforms.forEach(function (platform) {
     platform.draw();
   });
-  player.update();
-  ground.draw();
+  player.update(); //ground.draw()
 
   if (keys.right.pressed && player.position.x < 400) {
     player.velocity.x = 5;
@@ -259,13 +305,15 @@ function animate() {
   }); // Kolizja z platformą od dołu i boków
 
   platforms.forEach(function (platform) {
-    if (player.position.y >= platform.position.y && player.position.y + player.velocity.y <= platform.position.y && player.position.x + player.width >= platform.position.x && player.position.x <= platform.position.x + platform.width) {
+    if (player.position.y >= platform.position.y && player.position.y + player.velocity.y <= platform.position.y + platform.height && player.position.x + player.width >= platform.position.x && player.position.x <= platform.position.x + platform.width) {
       player.velocity.y = 5;
     }
   });
 
-  if (scrollOffset > 1000) {
+  if (scrollOffset > 3000) {
     console.log('Wygrałeś !!!');
+  } else if (scrollOffset < -100) {
+    console.log('Zmień kierunek !!!');
   }
 }
 
