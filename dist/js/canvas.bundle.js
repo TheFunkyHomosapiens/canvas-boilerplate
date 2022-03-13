@@ -145,6 +145,29 @@ var Player = /*#__PURE__*/function () {
   return Player;
 }();
 
+var Platform = /*#__PURE__*/function () {
+  function Platform() {
+    _classCallCheck(this, Platform);
+
+    this.position = {
+      x: 150,
+      y: 380
+    };
+    this.width = 200;
+    this.height = 20;
+  }
+
+  _createClass(Platform, [{
+    key: "draw",
+    value: function draw() {
+      c.fillStyle = 'green';
+      c.fillRect(this.position.x, this.position.y, this.width, this.height);
+    }
+  }]);
+
+  return Platform;
+}();
+
 var Ground = /*#__PURE__*/function () {
   function Ground() {
     _classCallCheck(this, Ground);
@@ -163,11 +186,6 @@ var Ground = /*#__PURE__*/function () {
       c.fillStyle = 'green';
       c.fillRect(this.position.x, this.position.y, this.width, this.height);
     }
-  }, {
-    key: "update",
-    value: function update() {
-      this.draw();
-    }
   }]);
 
   return Ground;
@@ -175,6 +193,7 @@ var Ground = /*#__PURE__*/function () {
 
 var player = new Player();
 var ground = new Ground();
+var platform = new Platform();
 var keys = {
   right: {
     pressed: false
@@ -188,7 +207,8 @@ function animate() {
   requestAnimationFrame(animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
   player.update();
-  ground.update();
+  ground.draw();
+  platform.draw();
 
   if (keys.right.pressed) {
     player.velocity.x = 5;

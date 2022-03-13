@@ -38,6 +38,22 @@ class Player {
     }
 }
 
+class Platform {
+    constructor() {
+        this.position = {
+            x: 150,
+            y: 380
+        }
+        this.width = 200
+        this.height = 20
+    }
+
+    draw() {
+        c.fillStyle = 'green'
+        c.fillRect(this.position.x, this.position.y, this.width, this.height)
+    }
+}
+
 class Ground {
     constructor() {
         this.position = {
@@ -52,14 +68,11 @@ class Ground {
         c.fillStyle = 'green'
         c.fillRect(this.position.x, this.position.y, this.width, this.height)
     }
-
-    update() {
-        this.draw()
-    }
 }
 
 const player = new Player()
 const ground = new Ground()
+const platform = new Platform()
 
 const keys = {
     right: {
@@ -75,7 +88,8 @@ function animate() {
     requestAnimationFrame(animate)
     c.clearRect(0, 0, canvas.width, canvas.height)
     player.update()
-    ground.update()
+    ground.draw()
+    platform.draw()
 
     if (keys.right.pressed) {
         player.velocity.x = 5
