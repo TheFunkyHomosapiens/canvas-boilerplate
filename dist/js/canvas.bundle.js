@@ -245,6 +245,33 @@ var GenericObject = /*#__PURE__*/function () {
 
   return GenericObject;
 }();
+
+var BackgroundObject = /*#__PURE__*/function () {
+  function BackgroundObject(_ref3) {
+    var x = _ref3.x,
+        y = _ref3.y,
+        image = _ref3.image;
+
+    _classCallCheck(this, BackgroundObject);
+
+    this.position = {
+      x: x,
+      y: y
+    };
+    this.image = image;
+    this.width = image.width;
+    this.height = image.height;
+  }
+
+  _createClass(BackgroundObject, [{
+    key: "draw",
+    value: function draw() {
+      c.drawImage(this.image, this.position.x, this.position.y);
+    }
+  }]);
+
+  return BackgroundObject;
+}();
 /*class Ground {
     constructor() {
         this.position = {
@@ -316,11 +343,12 @@ var platforms = [new Platform({
   y: 460,
   image: platformImage
 })];
-var genericObjects = [new GenericObject({
-  x: -1,
-  y: -1,
+var backgroundObject = [new BackgroundObject({
+  x: -2,
+  y: -2,
   image: createImage(_img_background_png__WEBPACK_IMPORTED_MODULE_2__["default"])
-}), new GenericObject({
+})];
+var genericObjects = [new GenericObject({
   x: -1,
   y: -1,
   image: createImage(_img_hills_png__WEBPACK_IMPORTED_MODULE_1__["default"])
@@ -342,6 +370,9 @@ function animate() {
   requestAnimationFrame(animate);
   c.fillStyle = 'white';
   c.fillRect(0, 0, canvas.width, canvas.height);
+  backgroundObject.forEach(function (backgroundObject) {
+    backgroundObject.draw();
+  });
   genericObjects.forEach(function (genericObjects) {
     genericObjects.draw();
   });
@@ -362,10 +393,22 @@ function animate() {
       platforms.forEach(function (platform) {
         platform.position.x -= 5;
       });
+      genericObjects.forEach(function (genericObjects) {
+        genericObjects.position.x -= 3;
+      });
+      backgroundObject.forEach(function (backgroundObject) {
+        backgroundObject.position.x -= 1;
+      });
     } else if (keys.left.pressed) {
       scrollOffset -= 5;
       platforms.forEach(function (platform) {
         platform.position.x += 5;
+      });
+      genericObjects.forEach(function (genericObjects) {
+        genericObjects.position.x += 3;
+      });
+      backgroundObject.forEach(function (backgroundObject) {
+        backgroundObject.position.x += 1;
       });
     }
   } // Kolizja z platformą od góry i boków
@@ -391,8 +434,8 @@ function animate() {
 }
 
 animate();
-addEventListener('keydown', function (_ref3) {
-  var key = _ref3.key;
+addEventListener('keydown', function (_ref4) {
+  var key = _ref4.key;
 
   switch (key) {
     case "a":
@@ -418,8 +461,8 @@ addEventListener('keydown', function (_ref3) {
 
   console.log(keys.left.pressed);
 });
-addEventListener('keyup', function (_ref4) {
-  var key = _ref4.key;
+addEventListener('keyup', function (_ref5) {
+  var key = _ref5.key;
 
   switch (key) {
     case "a":

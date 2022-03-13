@@ -74,6 +74,22 @@ class GenericObject {
     }
 }
 
+class BackgroundObject {
+    constructor({x, y, image}) {
+        this.position = {
+            x,
+            y
+        }
+        this.image = image
+        this.width = image.width
+        this.height = image.height
+    }
+
+    draw() {
+        c.drawImage(this.image, this.position.x, this.position.y)
+    }
+}
+
 /*class Ground {
     constructor() {
         this.position = {
@@ -108,12 +124,15 @@ const platforms = [new Platform({x: 300, y: 270, image: platformImage}), new Pla
         new Platform({x: 3268, y: 460, image: platformImage})
     ]
 
-const genericObjects = [
-    new GenericObject({
-        x: -1,
-        y: -1,
+const backgroundObject = [
+    new BackgroundObject({
+        x: -2,
+        y: -2,
         image: createImage(background)
-    }),
+    })
+]
+
+const genericObjects = [
     new GenericObject({
         x: -1,
         y: -1,
@@ -140,6 +159,10 @@ function animate() {
     c.fillStyle = 'white'
     c.fillRect(0, 0, canvas.width, canvas.height)
 
+    backgroundObject.forEach(backgroundObject => {
+        backgroundObject.draw()
+    })
+    
     genericObjects.forEach(genericObjects => {
         genericObjects.draw()
     })
@@ -163,11 +186,23 @@ function animate() {
             platforms.forEach(platform => {
                 platform.position.x -= 5
             })
+            genericObjects.forEach(genericObjects => {
+                genericObjects.position.x -= 3
+            })
+            backgroundObject.forEach(backgroundObject => {
+                backgroundObject.position.x -= 1
+            })
             
         } else if (keys.left.pressed) {
             scrollOffset -= 5
             platforms.forEach(platform => {
                 platform.position.x += 5 
+            })
+            genericObjects.forEach(genericObjects => {
+                genericObjects.position.x += 3
+            })
+            backgroundObject.forEach(backgroundObject => {
+                backgroundObject.position.x += 1
             })
         }
     }
