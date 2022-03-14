@@ -125,6 +125,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/img/spriteRunRight.png":
+/*!************************************!*\
+  !*** ./src/img/spriteRunRight.png ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "a2f75989924952a7e49ce0405d487c93.png");
+
+/***/ }),
+
 /***/ "./src/img/spriteStandRight.png":
 /*!**************************************!*\
   !*** ./src/img/spriteStandRight.png ***!
@@ -151,11 +164,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _img_hills_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../img/hills.png */ "./src/img/hills.png");
 /* harmony import */ var _img_background_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../img/background.png */ "./src/img/background.png");
 /* harmony import */ var _img_spriteStandRight_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../img/spriteStandRight.png */ "./src/img/spriteStandRight.png");
+/* harmony import */ var _img_spriteRunRight_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../img/spriteRunRight.png */ "./src/img/spriteRunRight.png");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -183,19 +198,33 @@ var Player = /*#__PURE__*/function () {
     this.height = 150;
     this.image = createImage(_img_spriteStandRight_png__WEBPACK_IMPORTED_MODULE_3__["default"]);
     this.frames = 0;
+    this.sprites = {
+      stand: {
+        right: createImage(_img_spriteStandRight_png__WEBPACK_IMPORTED_MODULE_3__["default"]),
+        cropWidth: 177,
+        width: 66
+      },
+      run: {
+        right: createImage(_img_spriteRunRight_png__WEBPACK_IMPORTED_MODULE_4__["default"]),
+        cropWidth: 341,
+        width: 127.875
+      }
+    };
+    this.currentSprite = this.sprites.stand.right;
+    this.currentCropWidth = 177;
   }
 
   _createClass(Player, [{
     key: "draw",
     value: function draw() {
-      c.drawImage(this.image, 177 * this.frames, 0, 177, 400, this.position.x, this.position.y, this.width, this.height);
+      c.drawImage(this.currentSprite, this.currentCropWidth * this.frames, 0, this.currentCropWidth, 400, this.position.x, this.position.y, this.width, this.height);
     }
   }, {
     key: "update",
     value: function update() {
       this.frames++;
 
-      if (this.frames > 28) {
+      if (this.frames > 29) {
         this.frames = 0;
       }
 
@@ -226,9 +255,9 @@ var Platform = /*#__PURE__*/function () {
       x: x,
       y: y
     };
-    this.image = image;
+    this.image = createImage(_img_platform_png__WEBPACK_IMPORTED_MODULE_0__["default"]);
     this.width = image.width;
-    this.height = image.height;
+    this.height = 30;
   }
 
   _createClass(Platform, [{
@@ -468,6 +497,9 @@ addEventListener('keydown', function (_ref4) {
     case "d":
       console.log('right');
       keys.right.pressed = true;
+      player.currentSprite = player.sprites.run.right;
+      player.currentCropWidth = player.sprites.run.cropWidth;
+      player.width = player.sprites.run.width;
       break;
 
     case "w":
@@ -493,6 +525,9 @@ addEventListener('keyup', function (_ref5) {
 
     case "d":
       keys.right.pressed = false;
+      player.currentSprite = player.sprites.stand.right;
+      player.currentCropWidth = player.sprites.stand.cropWidth;
+      player.width = player.sprites.stand.width;
       break;
 
     case "w":

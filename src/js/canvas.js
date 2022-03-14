@@ -2,6 +2,7 @@ import platform from '../img/platform.png'
 import hills from '../img/hills.png'
 import background from '../img/background.png'
 import spriteStandRight from '../img/spriteStandRight.png'
+import spriteRunRight from '../img/spriteRunRight.png'
 
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
@@ -25,11 +26,29 @@ class Player {
         this.height = 150
         this.image = createImage(spriteStandRight)
         this.frames = 0
+        this.sprites = {
+            stand: {
+                right: createImage(spriteStandRight),
+                cropWidth: 177,
+                width: 66
+            },
+            run: {
+                right: createImage(spriteRunRight),
+                cropWidth: 341,
+                width: 127.875
+            }
+        }
+        this.currentSprite = this.sprites.stand.right
+        this.currentCropWidth = 177
     }
 
     draw() {
         c.drawImage(
-            this.image, 177 * this.frames, 0, 177, 400,
+            this.currentSprite, 
+            this.currentCropWidth * this.frames, 
+            0, 
+            this.currentCropWidth, 
+            400,
             this.position.x, 
             this.position.y, 
             this.width, 
@@ -39,7 +58,7 @@ class Player {
 
     update() {
         this.frames++
-        if (this.frames > 28) 
+        if (this.frames > 29) 
             {this.frames = 0}
         this.draw()
         this.position.y += this.velocity.y
@@ -59,9 +78,9 @@ class Platform {
             x,
             y
         }
-        this.image = image
+        this.image = createImage(platform)
         this.width = image.width
-        this.height = image.height
+        this.height = 30 
     }
 
     draw() {
@@ -256,6 +275,9 @@ addEventListener('keydown', ({ key }) => {
         case "d":
             console.log('right')
             keys.right.pressed = true
+            player.currentSprite = player.sprites.run.right
+            player.currentCropWidth = player.sprites.run.cropWidth
+            player.width = player.sprites.run.width
             break
 
         case "w":
@@ -279,6 +301,9 @@ addEventListener('keyup', ({ key }) => {
         
         case "d":
             keys.right.pressed = false
+            player.currentSprite = player.sprites.stand.right
+            player.currentCropWidth = player.sprites.stand.cropWidth
+            player.width = player.sprites.stand.width
             break
 
         case "w":
