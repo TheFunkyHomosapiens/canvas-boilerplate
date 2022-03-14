@@ -125,6 +125,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/img/spriteRunLeft.png":
+/*!***********************************!*\
+  !*** ./src/img/spriteRunLeft.png ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "c67ea51444aafa9bdcd5bdfd4f4a55bb.png");
+
+/***/ }),
+
 /***/ "./src/img/spriteRunRight.png":
 /*!************************************!*\
   !*** ./src/img/spriteRunRight.png ***!
@@ -135,6 +148,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "a2f75989924952a7e49ce0405d487c93.png");
+
+/***/ }),
+
+/***/ "./src/img/spriteStandLeft.png":
+/*!*************************************!*\
+  !*** ./src/img/spriteStandLeft.png ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "11514f48f22f6d8e3cf748e45e3e1ffb.png");
 
 /***/ }),
 
@@ -164,12 +190,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _img_hills_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../img/hills.png */ "./src/img/hills.png");
 /* harmony import */ var _img_background_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../img/background.png */ "./src/img/background.png");
 /* harmony import */ var _img_spriteStandRight_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../img/spriteStandRight.png */ "./src/img/spriteStandRight.png");
-/* harmony import */ var _img_spriteRunRight_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../img/spriteRunRight.png */ "./src/img/spriteRunRight.png");
+/* harmony import */ var _img_spriteStandLeft_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../img/spriteStandLeft.png */ "./src/img/spriteStandLeft.png");
+/* harmony import */ var _img_spriteRunRight_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../img/spriteRunRight.png */ "./src/img/spriteRunRight.png");
+/* harmony import */ var _img_spriteRunLeft_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../img/spriteRunLeft.png */ "./src/img/spriteRunLeft.png");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
 
 
 
@@ -201,11 +231,13 @@ var Player = /*#__PURE__*/function () {
     this.sprites = {
       stand: {
         right: createImage(_img_spriteStandRight_png__WEBPACK_IMPORTED_MODULE_3__["default"]),
+        left: createImage(_img_spriteStandLeft_png__WEBPACK_IMPORTED_MODULE_4__["default"]),
         cropWidth: 177,
         width: 66
       },
       run: {
-        right: createImage(_img_spriteRunRight_png__WEBPACK_IMPORTED_MODULE_4__["default"]),
+        right: createImage(_img_spriteRunRight_png__WEBPACK_IMPORTED_MODULE_5__["default"]),
+        left: createImage(_img_spriteRunLeft_png__WEBPACK_IMPORTED_MODULE_6__["default"]),
         cropWidth: 341,
         width: 127.875
       }
@@ -323,22 +355,6 @@ var BackgroundObject = /*#__PURE__*/function () {
 
   return BackgroundObject;
 }();
-/*class Ground {
-    constructor() {
-        this.position = {
-            x: 0,
-            y: 500
-        }
-        this.width = 2000
-        this.height = 150
-    }
-
-    draw() {
-        c.fillStyle = 'green'
-        c.fillRect(this.position.x, this.position.y, this.width, this.height)
-    }
-}*/
-
 
 function createImage(imageSrc) {
   var image = new Image();
@@ -347,8 +363,7 @@ function createImage(imageSrc) {
 }
 
 var platformImage = createImage(_img_platform_png__WEBPACK_IMPORTED_MODULE_0__["default"]);
-var player = new Player(); //const ground = new Ground()
-
+var player = new Player();
 var platforms = [new Platform({
   x: 300,
   y: 250,
@@ -430,36 +445,36 @@ function animate() {
   platforms.forEach(function (platform) {
     platform.draw();
   });
-  player.update(); //ground.draw()
+  player.update();
 
   if (keys.right.pressed && player.position.x < 400) {
-    player.velocity.x = 5;
+    player.velocity.x = 8;
   } else if (keys.left.pressed && player.position.x > 200) {
-    player.velocity.x = -5;
+    player.velocity.x = -8;
   } else {
     player.velocity.x = 0;
 
     if (keys.right.pressed) {
-      scrollOffset += 5;
+      scrollOffset += 8;
       platforms.forEach(function (platform) {
-        platform.position.x -= 5;
+        platform.position.x -= 8;
       });
       genericObjects.forEach(function (genericObjects) {
-        genericObjects.position.x -= 3;
+        genericObjects.position.x -= 5;
       });
       backgroundObject.forEach(function (backgroundObject) {
-        backgroundObject.position.x -= 1;
+        backgroundObject.position.x -= 2;
       });
     } else if (keys.left.pressed) {
-      scrollOffset -= 5;
+      scrollOffset -= 8;
       platforms.forEach(function (platform) {
-        platform.position.x += 5;
+        platform.position.x += 8;
       });
       genericObjects.forEach(function (genericObjects) {
-        genericObjects.position.x += 3;
+        genericObjects.position.x += 5;
       });
       backgroundObject.forEach(function (backgroundObject) {
-        backgroundObject.position.x += 1;
+        backgroundObject.position.x += 2;
       });
     }
   } // Kolizja z platformą od góry i boków
@@ -492,6 +507,9 @@ addEventListener('keydown', function (_ref4) {
     case "a":
       console.log('left');
       keys.left.pressed = true;
+      player.currentSprite = player.sprites.run.left;
+      player.currentCropWidth = player.sprites.run.cropWidth;
+      player.width = player.sprites.run.width;
       break;
 
     case "d":
@@ -521,6 +539,9 @@ addEventListener('keyup', function (_ref5) {
   switch (key) {
     case "a":
       keys.left.pressed = false;
+      player.currentSprite = player.sprites.stand.left;
+      player.currentCropWidth = player.sprites.stand.cropWidth;
+      player.width = player.sprites.stand.width;
       break;
 
     case "d":
