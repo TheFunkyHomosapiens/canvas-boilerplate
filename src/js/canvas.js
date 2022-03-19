@@ -1,19 +1,23 @@
 import platform from '../img/platform.png'
-import hills from '../img/hills.png'
-import background from '../img/background.png'
-import spriteStandRight from '../img/spriteStandRight.png'
-import spriteStandLeft from '../img/spriteStandLeft.png'
-import spriteRunRight from '../img/spriteRunRight.png'
-import spriteRunLeft from '../img/spriteRunLeft.png'
+import farClouds from '../img/tło5.png'
+import clouds from '../img/tło4.png'
+import sky from '../img/tło3.png'
+import hills from '../img/tło1.png'
+import background from '../img/tło2.png'
+import spriteStandRight from '../img/idleright.png'
+import spriteStandLeft from '../img/idle_left.png'
+import spriteRunRight from '../img/run_right.png'
+import spriteRunLeft from '../img/run_left.png'
 
+
+// Zmienne główne
 const canvas = document.querySelector('canvas')
-const c = canvas.getContext('2d')
-
+const screen = canvas.getContext('2d')
 canvas.width = 1024
 canvas.height = 576
- 
 const gravity = 0.2
 
+// Klasy 
 class Player {
     constructor() {
         this.position = {
@@ -24,35 +28,38 @@ class Player {
             x: 0,
             y: 0
         }
-        this.width = 66
-        this.height = 150
+        this.width = 100
+        this.height = 156
         this.image = createImage(spriteStandRight)
         this.frames = 0
         this.sprites = {
             stand: {
                 right: createImage(spriteStandRight),
-                left: createImage(spriteStandLeft),
-                cropWidth: 177,
-                width: 66
+                
+                cropWidth: 310.3,
+                width: 100,
+            
+                left: createImage(spriteStandLeft)
+                
             },
             run: {
                 right: createImage(spriteRunRight),
                 left: createImage(spriteRunLeft),
-                cropWidth: 341,
-                width: 127.875
+                cropWidth: 415,
+                width: 130
             }
         }
         this.currentSprite = this.sprites.stand.right
-        this.currentCropWidth = 177
+        this.currentCropWidth = 310.3
     }
 
     draw() {
-        c.drawImage(
+        screen.drawImage(
             this.currentSprite, 
             this.currentCropWidth * this.frames, 
             0, 
             this.currentCropWidth, 
-            400,
+            500,
             this.position.x, 
             this.position.y, 
             this.width, 
@@ -88,7 +95,7 @@ class Platform {
     }
 
     draw() {
-        c.drawImage(this.image, this.position.x, this.position.y)
+        screen.drawImage(this.image, this.position.x, this.position.y)
     }
 }
 
@@ -104,7 +111,7 @@ class GenericObject {
     }
 
     draw() {
-        c.drawImage(this.image, this.position.x, this.position.y)
+        screen.drawImage(this.image, this.position.x, this.position.y)
     }
 }
 
@@ -120,27 +127,100 @@ class BackgroundObject {
     }
 
     draw() {
-        c.drawImage(this.image, this.position.x, this.position.y)
+        screen.drawImage(this.image, this.position.x, this.position.y)
     }
 }
 
+class SkyObject {
+    constructor({x, y, image}) {
+        this.position = {
+            x,
+            y
+        }
+        this.image = image
+        this.width = image.width
+        this.height = image.height
+    }
+
+    draw() {
+        screen.drawImage(this.image, this.position.x, this.position.y)
+    }
+}
+
+class CloudsObject {
+    constructor({x, y, image}) {
+        this.position = {
+            x,
+            y
+        }
+        this.image = image
+        this.width = image.width
+        this.height = image.height
+    }
+
+    draw() {
+        screen.drawImage(this.image, this.position.x, this.position.y)
+    }
+}
+
+class FarCloudsObject {
+    constructor({x, y, image}) {
+        this.position = {
+            x,
+            y
+        }
+        this.image = image
+        this.width = image.width
+        this.height = image.height
+    }
+
+    draw() {
+        screen.drawImage(this.image, this.position.x, this.position.y)
+    }
+}
+
+// Funkcja ładowania obrazów
 function createImage(imageSrc) {
     const image = new Image()
     image.src = imageSrc
     return image
 }
 
+// Zmienne klas
 const platformImage = createImage(platform)
 
 const player = new Player()
 
-const platforms = [new Platform({x: 300, y: 250, image: platformImage}), new Platform({x: 1100, y: 180, image: platformImage}),
-        new Platform({x: 1900, y: 220, image: platformImage}), new Platform({x: 2850, y: 180, image: platformImage}), 
-        new Platform({x: -200, y: 460, image: platformImage}), new Platform({x: 378, y: 460, image: platformImage}), 
-        new Platform({x: 956, y: 460, image: platformImage}), new Platform({x: 1534, y: 460, image: platformImage}), 
-        new Platform({x: 2112, y: 460, image: platformImage}), new Platform({x: 2890, y: 460, image: platformImage}),
-        new Platform({x: 3668, y: 460, image: platformImage})
+const platforms = [new Platform({x: 0, y: 510, image: platformImage}), new Platform({x: 400, y: 510, image: platformImage}), new Platform({x: 1000, y: 310, image: platformImage}),
+    new Platform({x: 1700, y: 510, image: platformImage}), new Platform({x: 2350, y: 350, image: platformImage}), new Platform({x: 3000, y: 200, image: platformImage}),
+    new Platform({x:3700, y: 330, image: platformImage}), new Platform({x: 4300, y: 510, image: platformImage}), new Platform({x: 5100, y: 510, image: platformImage}),
+    new Platform({x: 5800, y: 400, image: platformImage}), new Platform({x: 6550, y: 510, image: platformImage}), new Platform({x: 6950, y: 510, image: platformImage})
+        
     ]
+
+const farCloudsObject = [
+    new FarCloudsObject({
+        x: -2,
+        y: -2,
+            image: createImage(farClouds)
+    })
+]
+
+const cloudsObject = [
+    new CloudsObject({
+        x: -2,
+        y: -2,
+        image: createImage(clouds)
+    })
+]
+
+const skyObject = [
+    new SkyObject({
+        x: -2,
+        y: -2,
+        image: createImage(sky)
+    })
+]
 
 const backgroundObject = [
     new BackgroundObject({
@@ -172,15 +252,28 @@ const keys = {
 
 let scrollOffset = 0
 
+// Pętla gry
 function animate() {
     requestAnimationFrame(animate)
-    c.fillStyle = 'white'
-    c.fillRect(0, 0, canvas.width, canvas.height)
+    screen.fillStyle = 'white'
+    screen.fillRect(0, 0, canvas.width, canvas.height)
+
+    skyObject.forEach(skyObject => {
+        skyObject.draw()
+    })
+
+    farCloudsObject.forEach(farCloudsObject => {
+        farCloudsObject.draw()
+    })
+
+    cloudsObject.forEach(cloudsObject => {
+        cloudsObject.draw()
+    })
 
     backgroundObject.forEach(backgroundObject => {
         backgroundObject.draw()
     })
-    
+
     genericObjects.forEach(genericObjects => {
         genericObjects.draw()
     })
@@ -191,9 +284,11 @@ function animate() {
     
     player.update()
 
-    if (keys.right.pressed && player.position.x < 400) {
+    // Efekt poryszającego się gracza, przesuwające się tło
+    // oraz efekt parallax dla warstw tła
+    if (keys.right.pressed && player.position.x < 450) {
         player.velocity.x = 8
-    } else if (keys.left.pressed && player.position.x > 200) {
+    } else if (keys.left.pressed && player.position.x > 450) {
         player.velocity.x = -8
     } else {
         player.velocity.x = 0
@@ -204,10 +299,19 @@ function animate() {
                 platform.position.x -= 8
             })
             genericObjects.forEach(genericObjects => {
-                genericObjects.position.x -= 5
+                genericObjects.position.x -= 4.5
             })
             backgroundObject.forEach(backgroundObject => {
-                backgroundObject.position.x -= 2
+                backgroundObject.position.x -= 3.5
+            })
+            skyObject.forEach(skyObject => {
+                skyObject.position.x -= 1
+            })
+            cloudsObject.forEach(cloudsObject => {
+                cloudsObject.position.x -= 1.5
+            })
+            farCloudsObject.forEach(farCloudsObject => {
+                farCloudsObject.position.x -= 1
             })
             
         } else if (keys.left.pressed) {
@@ -216,10 +320,19 @@ function animate() {
                 platform.position.x += 8 
             })
             genericObjects.forEach(genericObjects => {
-                genericObjects.position.x += 5
+                genericObjects.position.x += 4.5 
             })
             backgroundObject.forEach(backgroundObject => {
-                backgroundObject.position.x += 2
+                backgroundObject.position.x += 3.5
+            })
+            skyObject.forEach(skyObject => {
+                skyObject.position.x += 1
+            })
+            cloudsObject.forEach(cloudsObject => {
+                cloudsObject.position.x += 1.5
+            })
+            farCloudsObject.forEach(farCloudsObject => {
+                farCloudsObject.position.x += 1
             })
         }
     }
@@ -243,6 +356,7 @@ function animate() {
             player.velocity.y = 5
         }
     })
+
     if (scrollOffset > 3000) {
         console.log('Wygrałeś !!!')
     } else if (scrollOffset < -100) {
@@ -252,13 +366,14 @@ function animate() {
 
 animate()
 
+// Obsługa klawiszy sterujących
 addEventListener('keydown', ({ key }) => {
     switch (key) {
         case "a":
             console.log('left')
             keys.left.pressed = true
             player.currentSprite = player.sprites.run.left
-            player.currentCropWidth = player.sprites.run.cropWidth
+            player.currentCropWidth = 415.25
             player.width = player.sprites.run.width
             break
         
@@ -266,7 +381,7 @@ addEventListener('keydown', ({ key }) => {
             console.log('right')
             keys.right.pressed = true
             player.currentSprite = player.sprites.run.right
-            player.currentCropWidth = player.sprites.run.cropWidth
+            player.currentCropWidth = 414.75
             player.width = player.sprites.run.width
             break
 
@@ -288,14 +403,14 @@ addEventListener('keyup', ({ key }) => {
         case "a":
             keys.left.pressed = false
             player.currentSprite = player.sprites.stand.left
-            player.currentCropWidth = player.sprites.stand.cropWidth
+            player.currentCropWidth = 311.3
             player.width = player.sprites.stand.width
             break
         
         case "d":
             keys.right.pressed = false
             player.currentSprite = player.sprites.stand.right
-            player.currentCropWidth = player.sprites.stand.cropWidth
+            player.currentCropWidth = 310.2
             player.width = player.sprites.stand.width
             break
 

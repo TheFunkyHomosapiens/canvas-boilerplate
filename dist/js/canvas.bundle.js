@@ -86,29 +86,29 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/img/background.png":
-/*!********************************!*\
-  !*** ./src/img/background.png ***!
-  \********************************/
+/***/ "./src/img/idle_left.png":
+/*!*******************************!*\
+  !*** ./src/img/idle_left.png ***!
+  \*******************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "072d51bcc9c09311d4c2a6708b05bddc.png");
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "2fd48b556da9e03036a9247531843759.png");
 
 /***/ }),
 
-/***/ "./src/img/hills.png":
-/*!***************************!*\
-  !*** ./src/img/hills.png ***!
-  \***************************/
+/***/ "./src/img/idleright.png":
+/*!*******************************!*\
+  !*** ./src/img/idleright.png ***!
+  \*******************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "cfffe4c371f5e11d372b398a87c51dd0.png");
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "5e55380cc6b382d3f8d4c67faee4dbac.png");
 
 /***/ }),
 
@@ -121,59 +121,98 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "ffab39d3487de561be1a081fcfb3806d.png");
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "fa0db6a71a3f1b88030cff24fd4e5f39.png");
 
 /***/ }),
 
-/***/ "./src/img/spriteRunLeft.png":
-/*!***********************************!*\
-  !*** ./src/img/spriteRunLeft.png ***!
-  \***********************************/
+/***/ "./src/img/run_left.png":
+/*!******************************!*\
+  !*** ./src/img/run_left.png ***!
+  \******************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "c67ea51444aafa9bdcd5bdfd4f4a55bb.png");
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "aaa5dd51bea3966a92d1ceed1362d6ad.png");
 
 /***/ }),
 
-/***/ "./src/img/spriteRunRight.png":
-/*!************************************!*\
-  !*** ./src/img/spriteRunRight.png ***!
-  \************************************/
+/***/ "./src/img/run_right.png":
+/*!*******************************!*\
+  !*** ./src/img/run_right.png ***!
+  \*******************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "a2f75989924952a7e49ce0405d487c93.png");
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "70469077bea87bca7831e2382a09c0e9.png");
 
 /***/ }),
 
-/***/ "./src/img/spriteStandLeft.png":
-/*!*************************************!*\
-  !*** ./src/img/spriteStandLeft.png ***!
-  \*************************************/
+/***/ "./src/img/tło1.png":
+/*!**************************!*\
+  !*** ./src/img/tło1.png ***!
+  \**************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "11514f48f22f6d8e3cf748e45e3e1ffb.png");
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "18153e76633d23dbf0a1286e18efd88e.png");
 
 /***/ }),
 
-/***/ "./src/img/spriteStandRight.png":
-/*!**************************************!*\
-  !*** ./src/img/spriteStandRight.png ***!
-  \**************************************/
+/***/ "./src/img/tło2.png":
+/*!**************************!*\
+  !*** ./src/img/tło2.png ***!
+  \**************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "01e8f15e899155c68950c40e0a6b8df0.png");
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "ac7a9d5bc549e1f080b6d4122ae78f81.png");
+
+/***/ }),
+
+/***/ "./src/img/tło3.png":
+/*!**************************!*\
+  !*** ./src/img/tło3.png ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "bd42e17b2b0a537b5e5aef8a25dbfac3.png");
+
+/***/ }),
+
+/***/ "./src/img/tło4.png":
+/*!**************************!*\
+  !*** ./src/img/tło4.png ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "41b33320dcff9fd9b4d88db815a99b79.png");
+
+/***/ }),
+
+/***/ "./src/img/tło5.png":
+/*!**************************!*\
+  !*** ./src/img/tło5.png ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "8a311cfd4e522a24e0b6561638df9e3b.png");
 
 /***/ }),
 
@@ -187,12 +226,15 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _img_platform_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../img/platform.png */ "./src/img/platform.png");
-/* harmony import */ var _img_hills_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../img/hills.png */ "./src/img/hills.png");
-/* harmony import */ var _img_background_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../img/background.png */ "./src/img/background.png");
-/* harmony import */ var _img_spriteStandRight_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../img/spriteStandRight.png */ "./src/img/spriteStandRight.png");
-/* harmony import */ var _img_spriteStandLeft_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../img/spriteStandLeft.png */ "./src/img/spriteStandLeft.png");
-/* harmony import */ var _img_spriteRunRight_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../img/spriteRunRight.png */ "./src/img/spriteRunRight.png");
-/* harmony import */ var _img_spriteRunLeft_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../img/spriteRunLeft.png */ "./src/img/spriteRunLeft.png");
+/* harmony import */ var _img_t_o5_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../img/tło5.png */ "./src/img/tło5.png");
+/* harmony import */ var _img_t_o4_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../img/tło4.png */ "./src/img/tło4.png");
+/* harmony import */ var _img_t_o3_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../img/tło3.png */ "./src/img/tło3.png");
+/* harmony import */ var _img_t_o1_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../img/tło1.png */ "./src/img/tło1.png");
+/* harmony import */ var _img_t_o2_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../img/tło2.png */ "./src/img/tło2.png");
+/* harmony import */ var _img_idleright_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../img/idleright.png */ "./src/img/idleright.png");
+/* harmony import */ var _img_idle_left_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../img/idle_left.png */ "./src/img/idle_left.png");
+/* harmony import */ var _img_run_right_png__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../img/run_right.png */ "./src/img/run_right.png");
+/* harmony import */ var _img_run_left_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../img/run_left.png */ "./src/img/run_left.png");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -206,11 +248,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+
+
+ // Zmienne główne
+
 var canvas = document.querySelector('canvas');
-var c = canvas.getContext('2d');
+var screen = canvas.getContext('2d');
 canvas.width = 1024;
 canvas.height = 576;
-var gravity = 0.2;
+var gravity = 0.2; // Klasy 
 
 var Player = /*#__PURE__*/function () {
   function Player() {
@@ -224,32 +270,32 @@ var Player = /*#__PURE__*/function () {
       x: 0,
       y: 0
     };
-    this.width = 66;
-    this.height = 150;
-    this.image = createImage(_img_spriteStandRight_png__WEBPACK_IMPORTED_MODULE_3__["default"]);
+    this.width = 100;
+    this.height = 156;
+    this.image = createImage(_img_idleright_png__WEBPACK_IMPORTED_MODULE_6__["default"]);
     this.frames = 0;
     this.sprites = {
       stand: {
-        right: createImage(_img_spriteStandRight_png__WEBPACK_IMPORTED_MODULE_3__["default"]),
-        left: createImage(_img_spriteStandLeft_png__WEBPACK_IMPORTED_MODULE_4__["default"]),
-        cropWidth: 177,
-        width: 66
+        right: createImage(_img_idleright_png__WEBPACK_IMPORTED_MODULE_6__["default"]),
+        cropWidth: 310.3,
+        width: 100,
+        left: createImage(_img_idle_left_png__WEBPACK_IMPORTED_MODULE_7__["default"])
       },
       run: {
-        right: createImage(_img_spriteRunRight_png__WEBPACK_IMPORTED_MODULE_5__["default"]),
-        left: createImage(_img_spriteRunLeft_png__WEBPACK_IMPORTED_MODULE_6__["default"]),
-        cropWidth: 341,
-        width: 127.875
+        right: createImage(_img_run_right_png__WEBPACK_IMPORTED_MODULE_8__["default"]),
+        left: createImage(_img_run_left_png__WEBPACK_IMPORTED_MODULE_9__["default"]),
+        cropWidth: 415,
+        width: 130
       }
     };
     this.currentSprite = this.sprites.stand.right;
-    this.currentCropWidth = 177;
+    this.currentCropWidth = 310.3;
   }
 
   _createClass(Player, [{
     key: "draw",
     value: function draw() {
-      c.drawImage(this.currentSprite, this.currentCropWidth * this.frames, 0, this.currentCropWidth, 400, this.position.x, this.position.y, this.width, this.height);
+      screen.drawImage(this.currentSprite, this.currentCropWidth * this.frames, 0, this.currentCropWidth, 500, this.position.x, this.position.y, this.width, this.height);
     }
   }, {
     key: "update",
@@ -295,7 +341,7 @@ var Platform = /*#__PURE__*/function () {
   _createClass(Platform, [{
     key: "draw",
     value: function draw() {
-      c.drawImage(this.image, this.position.x, this.position.y);
+      screen.drawImage(this.image, this.position.x, this.position.y);
     }
   }]);
 
@@ -322,7 +368,7 @@ var GenericObject = /*#__PURE__*/function () {
   _createClass(GenericObject, [{
     key: "draw",
     value: function draw() {
-      c.drawImage(this.image, this.position.x, this.position.y);
+      screen.drawImage(this.image, this.position.x, this.position.y);
     }
   }]);
 
@@ -349,75 +395,177 @@ var BackgroundObject = /*#__PURE__*/function () {
   _createClass(BackgroundObject, [{
     key: "draw",
     value: function draw() {
-      c.drawImage(this.image, this.position.x, this.position.y);
+      screen.drawImage(this.image, this.position.x, this.position.y);
     }
   }]);
 
   return BackgroundObject;
 }();
 
+var SkyObject = /*#__PURE__*/function () {
+  function SkyObject(_ref4) {
+    var x = _ref4.x,
+        y = _ref4.y,
+        image = _ref4.image;
+
+    _classCallCheck(this, SkyObject);
+
+    this.position = {
+      x: x,
+      y: y
+    };
+    this.image = image;
+    this.width = image.width;
+    this.height = image.height;
+  }
+
+  _createClass(SkyObject, [{
+    key: "draw",
+    value: function draw() {
+      screen.drawImage(this.image, this.position.x, this.position.y);
+    }
+  }]);
+
+  return SkyObject;
+}();
+
+var CloudsObject = /*#__PURE__*/function () {
+  function CloudsObject(_ref5) {
+    var x = _ref5.x,
+        y = _ref5.y,
+        image = _ref5.image;
+
+    _classCallCheck(this, CloudsObject);
+
+    this.position = {
+      x: x,
+      y: y
+    };
+    this.image = image;
+    this.width = image.width;
+    this.height = image.height;
+  }
+
+  _createClass(CloudsObject, [{
+    key: "draw",
+    value: function draw() {
+      screen.drawImage(this.image, this.position.x, this.position.y);
+    }
+  }]);
+
+  return CloudsObject;
+}();
+
+var FarCloudsObject = /*#__PURE__*/function () {
+  function FarCloudsObject(_ref6) {
+    var x = _ref6.x,
+        y = _ref6.y,
+        image = _ref6.image;
+
+    _classCallCheck(this, FarCloudsObject);
+
+    this.position = {
+      x: x,
+      y: y
+    };
+    this.image = image;
+    this.width = image.width;
+    this.height = image.height;
+  }
+
+  _createClass(FarCloudsObject, [{
+    key: "draw",
+    value: function draw() {
+      screen.drawImage(this.image, this.position.x, this.position.y);
+    }
+  }]);
+
+  return FarCloudsObject;
+}(); // Funkcja ładowania obrazów
+
+
 function createImage(imageSrc) {
   var image = new Image();
   image.src = imageSrc;
   return image;
-}
+} // Zmienne klas
+
 
 var platformImage = createImage(_img_platform_png__WEBPACK_IMPORTED_MODULE_0__["default"]);
 var player = new Player();
 var platforms = [new Platform({
-  x: 300,
-  y: 250,
+  x: 0,
+  y: 510,
   image: platformImage
 }), new Platform({
-  x: 1100,
-  y: 180,
+  x: 400,
+  y: 510,
   image: platformImage
 }), new Platform({
-  x: 1900,
-  y: 220,
+  x: 1000,
+  y: 310,
   image: platformImage
 }), new Platform({
-  x: 2850,
-  y: 180,
+  x: 1700,
+  y: 510,
   image: platformImage
 }), new Platform({
-  x: -200,
-  y: 460,
+  x: 2350,
+  y: 350,
   image: platformImage
 }), new Platform({
-  x: 378,
-  y: 460,
+  x: 3000,
+  y: 200,
   image: platformImage
 }), new Platform({
-  x: 956,
-  y: 460,
+  x: 3700,
+  y: 330,
   image: platformImage
 }), new Platform({
-  x: 1534,
-  y: 460,
+  x: 4300,
+  y: 510,
   image: platformImage
 }), new Platform({
-  x: 2112,
-  y: 460,
+  x: 5100,
+  y: 510,
   image: platformImage
 }), new Platform({
-  x: 2890,
-  y: 460,
+  x: 5800,
+  y: 400,
   image: platformImage
 }), new Platform({
-  x: 3668,
-  y: 460,
+  x: 6550,
+  y: 510,
   image: platformImage
+}), new Platform({
+  x: 6950,
+  y: 510,
+  image: platformImage
+})];
+var farCloudsObject = [new FarCloudsObject({
+  x: -2,
+  y: -2,
+  image: createImage(_img_t_o5_png__WEBPACK_IMPORTED_MODULE_1__["default"])
+})];
+var cloudsObject = [new CloudsObject({
+  x: -2,
+  y: -2,
+  image: createImage(_img_t_o4_png__WEBPACK_IMPORTED_MODULE_2__["default"])
+})];
+var skyObject = [new SkyObject({
+  x: -2,
+  y: -2,
+  image: createImage(_img_t_o3_png__WEBPACK_IMPORTED_MODULE_3__["default"])
 })];
 var backgroundObject = [new BackgroundObject({
   x: -2,
   y: -2,
-  image: createImage(_img_background_png__WEBPACK_IMPORTED_MODULE_2__["default"])
+  image: createImage(_img_t_o2_png__WEBPACK_IMPORTED_MODULE_5__["default"])
 })];
 var genericObjects = [new GenericObject({
   x: -1,
   y: -1,
-  image: createImage(_img_hills_png__WEBPACK_IMPORTED_MODULE_1__["default"])
+  image: createImage(_img_t_o1_png__WEBPACK_IMPORTED_MODULE_4__["default"])
 })];
 var keys = {
   right: {
@@ -430,12 +578,21 @@ var keys = {
     pressed: false
   }
 };
-var scrollOffset = 0;
+var scrollOffset = 0; // Pętla gry
 
 function animate() {
   requestAnimationFrame(animate);
-  c.fillStyle = 'white';
-  c.fillRect(0, 0, canvas.width, canvas.height);
+  screen.fillStyle = 'white';
+  screen.fillRect(0, 0, canvas.width, canvas.height);
+  skyObject.forEach(function (skyObject) {
+    skyObject.draw();
+  });
+  farCloudsObject.forEach(function (farCloudsObject) {
+    farCloudsObject.draw();
+  });
+  cloudsObject.forEach(function (cloudsObject) {
+    cloudsObject.draw();
+  });
   backgroundObject.forEach(function (backgroundObject) {
     backgroundObject.draw();
   });
@@ -445,11 +602,12 @@ function animate() {
   platforms.forEach(function (platform) {
     platform.draw();
   });
-  player.update();
+  player.update(); // Efekt poryszającego się gracza, przesuwające się tło
+  // oraz efekt parallax dla warstw tła
 
-  if (keys.right.pressed && player.position.x < 400) {
+  if (keys.right.pressed && player.position.x < 450) {
     player.velocity.x = 8;
-  } else if (keys.left.pressed && player.position.x > 200) {
+  } else if (keys.left.pressed && player.position.x > 450) {
     player.velocity.x = -8;
   } else {
     player.velocity.x = 0;
@@ -460,10 +618,19 @@ function animate() {
         platform.position.x -= 8;
       });
       genericObjects.forEach(function (genericObjects) {
-        genericObjects.position.x -= 5;
+        genericObjects.position.x -= 4.5;
       });
       backgroundObject.forEach(function (backgroundObject) {
-        backgroundObject.position.x -= 2;
+        backgroundObject.position.x -= 3.5;
+      });
+      skyObject.forEach(function (skyObject) {
+        skyObject.position.x -= 1;
+      });
+      cloudsObject.forEach(function (cloudsObject) {
+        cloudsObject.position.x -= 1.5;
+      });
+      farCloudsObject.forEach(function (farCloudsObject) {
+        farCloudsObject.position.x -= 1;
       });
     } else if (keys.left.pressed) {
       scrollOffset -= 8;
@@ -471,10 +638,19 @@ function animate() {
         platform.position.x += 8;
       });
       genericObjects.forEach(function (genericObjects) {
-        genericObjects.position.x += 5;
+        genericObjects.position.x += 4.5;
       });
       backgroundObject.forEach(function (backgroundObject) {
-        backgroundObject.position.x += 2;
+        backgroundObject.position.x += 3.5;
+      });
+      skyObject.forEach(function (skyObject) {
+        skyObject.position.x += 1;
+      });
+      cloudsObject.forEach(function (cloudsObject) {
+        cloudsObject.position.x += 1.5;
+      });
+      farCloudsObject.forEach(function (farCloudsObject) {
+        farCloudsObject.position.x += 1;
       });
     }
   } // Kolizja z platformą od góry i boków
@@ -499,16 +675,17 @@ function animate() {
   }
 }
 
-animate();
-addEventListener('keydown', function (_ref4) {
-  var key = _ref4.key;
+animate(); // Obsługa klawiszy sterujących
+
+addEventListener('keydown', function (_ref7) {
+  var key = _ref7.key;
 
   switch (key) {
     case "a":
       console.log('left');
       keys.left.pressed = true;
       player.currentSprite = player.sprites.run.left;
-      player.currentCropWidth = player.sprites.run.cropWidth;
+      player.currentCropWidth = 415.25;
       player.width = player.sprites.run.width;
       break;
 
@@ -516,7 +693,7 @@ addEventListener('keydown', function (_ref4) {
       console.log('right');
       keys.right.pressed = true;
       player.currentSprite = player.sprites.run.right;
-      player.currentCropWidth = player.sprites.run.cropWidth;
+      player.currentCropWidth = 414.75;
       player.width = player.sprites.run.width;
       break;
 
@@ -533,21 +710,21 @@ addEventListener('keydown', function (_ref4) {
 
   console.log(keys.left.pressed);
 });
-addEventListener('keyup', function (_ref5) {
-  var key = _ref5.key;
+addEventListener('keyup', function (_ref8) {
+  var key = _ref8.key;
 
   switch (key) {
     case "a":
       keys.left.pressed = false;
       player.currentSprite = player.sprites.stand.left;
-      player.currentCropWidth = player.sprites.stand.cropWidth;
+      player.currentCropWidth = 311.3;
       player.width = player.sprites.stand.width;
       break;
 
     case "d":
       keys.right.pressed = false;
       player.currentSprite = player.sprites.stand.right;
-      player.currentCropWidth = player.sprites.stand.cropWidth;
+      player.currentCropWidth = 310.2;
       player.width = player.sprites.stand.width;
       break;
 
