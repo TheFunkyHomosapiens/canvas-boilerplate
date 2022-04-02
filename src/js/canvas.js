@@ -251,117 +251,121 @@ const keys = {
 }
 
 let scrollOffset = 0
+let framesPerSecond = 55
 
 // Pętla gry
 function animate() {
-    requestAnimationFrame(animate)
-    screen.fillStyle = 'white'
-    screen.fillRect(0, 0, canvas.width, canvas.height)
+    setTimeout(function() {
+        requestAnimationFrame(animate)
+        screen.fillStyle = 'white'
+        screen.fillRect(0, 0, canvas.width, canvas.height)
 
-    skyObject.forEach(skyObject => {
-        skyObject.draw()
-    })
+        skyObject.forEach(skyObject => {
+            skyObject.draw()
+        })
 
-    farCloudsObject.forEach(farCloudsObject => {
-        farCloudsObject.draw()
-    })
+        farCloudsObject.forEach(farCloudsObject => {
+            farCloudsObject.draw()
+        })
 
-    cloudsObject.forEach(cloudsObject => {
-        cloudsObject.draw()
-    })
+        cloudsObject.forEach(cloudsObject => {
+            cloudsObject.draw()
+        })
 
-    backgroundObject.forEach(backgroundObject => {
-        backgroundObject.draw()
-    })
+        backgroundObject.forEach(backgroundObject => {
+            backgroundObject.draw()
+        })
 
-    genericObjects.forEach(genericObjects => {
-        genericObjects.draw()
-    })
+        genericObjects.forEach(genericObjects => {
+            genericObjects.draw()
+        })
 
-    platforms.forEach(platform => {
-        platform.draw()
-    })
-    
-    player.update()
+        platforms.forEach(platform => {
+            platform.draw()
+        })
+        
+        player.update()
 
-    // Efekt poryszającego się gracza, przesuwające się tło
-    // oraz efekt parallax dla warstw tła
-    if (keys.right.pressed && player.position.x < 450) {
-        player.velocity.x = 8
-    } else if (keys.left.pressed && player.position.x > 450) {
-        player.velocity.x = -8
-    } else {
-        player.velocity.x = 0
+        // Efekt poryszającego się gracza, przesuwające się tło
+        // oraz efekt parallax dla warstw tła
+        if (keys.right.pressed && player.position.x < 450) {
+            player.velocity.x = 8
+        } else if (keys.left.pressed && player.position.x > 450) {
+            player.velocity.x = -8
+        } else {
+            player.velocity.x = 0
 
-        if (keys.right.pressed) {
-            scrollOffset += 8
-            platforms.forEach(platform => {
-                platform.position.x -= 8
-            })
-            genericObjects.forEach(genericObjects => {
-                genericObjects.position.x -= 4.5
-            })
-            backgroundObject.forEach(backgroundObject => {
-                backgroundObject.position.x -= 3.5
-            })
-            skyObject.forEach(skyObject => {
-                skyObject.position.x -= 1
-            })
-            cloudsObject.forEach(cloudsObject => {
-                cloudsObject.position.x -= 1.5
-            })
-            farCloudsObject.forEach(farCloudsObject => {
-                farCloudsObject.position.x -= 1
-            })
+            if (keys.right.pressed) {
+                scrollOffset += 8
+                platforms.forEach(platform => {
+                    platform.position.x -= 8
+                })
+                genericObjects.forEach(genericObjects => {
+                    genericObjects.position.x -= 4.5
+                })
+                backgroundObject.forEach(backgroundObject => {
+                    backgroundObject.position.x -= 3.5
+                })
+                skyObject.forEach(skyObject => {
+                    skyObject.position.x -= 1
+                })
+                cloudsObject.forEach(cloudsObject => {
+                    cloudsObject.position.x -= 1.5
+                })
+                farCloudsObject.forEach(farCloudsObject => {
+                    farCloudsObject.position.x -= 1
+                })
+                
+            } else if (keys.left.pressed) {
+                scrollOffset -= 8
+                platforms.forEach(platform => {
+                    platform.position.x += 8 
+                })
+                genericObjects.forEach(genericObjects => {
+                    genericObjects.position.x += 4.5 
+                })
+                backgroundObject.forEach(backgroundObject => {
+                    backgroundObject.position.x += 3.5
+                })
+                skyObject.forEach(skyObject => {
+                    skyObject.position.x += 1
+                })
+                cloudsObject.forEach(cloudsObject => {
+                    cloudsObject.position.x += 1.5
+                })
+                farCloudsObject.forEach(farCloudsObject => {
+                    farCloudsObject.position.x += 1
+                })
+            }
             
-        } else if (keys.left.pressed) {
-            scrollOffset -= 8
-            platforms.forEach(platform => {
-                platform.position.x += 8 
-            })
-            genericObjects.forEach(genericObjects => {
-                genericObjects.position.x += 4.5 
-            })
-            backgroundObject.forEach(backgroundObject => {
-                backgroundObject.position.x += 3.5
-            })
-            skyObject.forEach(skyObject => {
-                skyObject.position.x += 1
-            })
-            cloudsObject.forEach(cloudsObject => {
-                cloudsObject.position.x += 1.5
-            })
-            farCloudsObject.forEach(farCloudsObject => {
-                farCloudsObject.position.x += 1
-            })
         }
-    }
 
-    // Kolizja z platformą od góry i boków
-    platforms.forEach(platform => {
-        if (player.position.y + player.height <= platform.position.y
-            && player.position.y + player.height + player.velocity.y >= platform.position.y
-            && player.position.x + player.width >= platform.position.x
-            && player.position.x <= platform.position.x + platform.width) {
-            player.velocity.y = 0
+        // Kolizja z platformą od góry i boków
+        platforms.forEach(platform => {
+            if (player.position.y + player.height <= platform.position.y
+                && player.position.y + player.height + player.velocity.y >= platform.position.y
+                && player.position.x + player.width >= platform.position.x
+                && player.position.x <= platform.position.x + platform.width) {
+                player.velocity.y = 0
+            }
+        })
+
+        // Kolizja z platformą od dołu i boków
+        platforms.forEach(platform => {
+            if (player.position.y >= platform.position.y
+                && player.position.y + player.velocity.y <= platform.position.y + platform.height
+                && player.position.x + player.width >= platform.position.x
+                && player.position.x <= platform.position.x + platform.width) {
+                player.velocity.y = 5
+            }
+        })
+
+        if (scrollOffset > 3000) {
+            console.log('Wygrałeś !!!')
+        } else if (scrollOffset < -100) {
+            console.log('Zmień kierunek !!!')
         }
-    })
-
-    // Kolizja z platformą od dołu i boków
-    platforms.forEach(platform => {
-        if (player.position.y >= platform.position.y
-            && player.position.y + player.velocity.y <= platform.position.y + platform.height
-            && player.position.x + player.width >= platform.position.x
-            && player.position.x <= platform.position.x + platform.width) {
-            player.velocity.y = 5
-        }
-    })
-
-    if (scrollOffset > 3000) {
-        console.log('Wygrałeś !!!')
-    } else if (scrollOffset < -100) {
-        console.log('Zmień kierunek !!!')
-    }
+    }, 1000 / framesPerSecond)
 }
 
 animate()

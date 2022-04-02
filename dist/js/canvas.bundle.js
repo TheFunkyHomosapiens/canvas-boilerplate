@@ -578,101 +578,104 @@ var keys = {
     pressed: false
   }
 };
-var scrollOffset = 0; // Pętla gry
+var scrollOffset = 0;
+var framesPerSecond = 55; // Pętla gry
 
 function animate() {
-  requestAnimationFrame(animate);
-  screen.fillStyle = 'white';
-  screen.fillRect(0, 0, canvas.width, canvas.height);
-  skyObject.forEach(function (skyObject) {
-    skyObject.draw();
-  });
-  farCloudsObject.forEach(function (farCloudsObject) {
-    farCloudsObject.draw();
-  });
-  cloudsObject.forEach(function (cloudsObject) {
-    cloudsObject.draw();
-  });
-  backgroundObject.forEach(function (backgroundObject) {
-    backgroundObject.draw();
-  });
-  genericObjects.forEach(function (genericObjects) {
-    genericObjects.draw();
-  });
-  platforms.forEach(function (platform) {
-    platform.draw();
-  });
-  player.update(); // Efekt poryszającego się gracza, przesuwające się tło
-  // oraz efekt parallax dla warstw tła
+  setTimeout(function () {
+    requestAnimationFrame(animate);
+    screen.fillStyle = 'white';
+    screen.fillRect(0, 0, canvas.width, canvas.height);
+    skyObject.forEach(function (skyObject) {
+      skyObject.draw();
+    });
+    farCloudsObject.forEach(function (farCloudsObject) {
+      farCloudsObject.draw();
+    });
+    cloudsObject.forEach(function (cloudsObject) {
+      cloudsObject.draw();
+    });
+    backgroundObject.forEach(function (backgroundObject) {
+      backgroundObject.draw();
+    });
+    genericObjects.forEach(function (genericObjects) {
+      genericObjects.draw();
+    });
+    platforms.forEach(function (platform) {
+      platform.draw();
+    });
+    player.update(); // Efekt poryszającego się gracza, przesuwające się tło
+    // oraz efekt parallax dla warstw tła
 
-  if (keys.right.pressed && player.position.x < 450) {
-    player.velocity.x = 8;
-  } else if (keys.left.pressed && player.position.x > 450) {
-    player.velocity.x = -8;
-  } else {
-    player.velocity.x = 0;
+    if (keys.right.pressed && player.position.x < 450) {
+      player.velocity.x = 8;
+    } else if (keys.left.pressed && player.position.x > 450) {
+      player.velocity.x = -8;
+    } else {
+      player.velocity.x = 0;
 
-    if (keys.right.pressed) {
-      scrollOffset += 8;
-      platforms.forEach(function (platform) {
-        platform.position.x -= 8;
-      });
-      genericObjects.forEach(function (genericObjects) {
-        genericObjects.position.x -= 4.5;
-      });
-      backgroundObject.forEach(function (backgroundObject) {
-        backgroundObject.position.x -= 3.5;
-      });
-      skyObject.forEach(function (skyObject) {
-        skyObject.position.x -= 1;
-      });
-      cloudsObject.forEach(function (cloudsObject) {
-        cloudsObject.position.x -= 1.5;
-      });
-      farCloudsObject.forEach(function (farCloudsObject) {
-        farCloudsObject.position.x -= 1;
-      });
-    } else if (keys.left.pressed) {
-      scrollOffset -= 8;
-      platforms.forEach(function (platform) {
-        platform.position.x += 8;
-      });
-      genericObjects.forEach(function (genericObjects) {
-        genericObjects.position.x += 4.5;
-      });
-      backgroundObject.forEach(function (backgroundObject) {
-        backgroundObject.position.x += 3.5;
-      });
-      skyObject.forEach(function (skyObject) {
-        skyObject.position.x += 1;
-      });
-      cloudsObject.forEach(function (cloudsObject) {
-        cloudsObject.position.x += 1.5;
-      });
-      farCloudsObject.forEach(function (farCloudsObject) {
-        farCloudsObject.position.x += 1;
-      });
+      if (keys.right.pressed) {
+        scrollOffset += 8;
+        platforms.forEach(function (platform) {
+          platform.position.x -= 8;
+        });
+        genericObjects.forEach(function (genericObjects) {
+          genericObjects.position.x -= 4.5;
+        });
+        backgroundObject.forEach(function (backgroundObject) {
+          backgroundObject.position.x -= 3.5;
+        });
+        skyObject.forEach(function (skyObject) {
+          skyObject.position.x -= 1;
+        });
+        cloudsObject.forEach(function (cloudsObject) {
+          cloudsObject.position.x -= 1.5;
+        });
+        farCloudsObject.forEach(function (farCloudsObject) {
+          farCloudsObject.position.x -= 1;
+        });
+      } else if (keys.left.pressed) {
+        scrollOffset -= 8;
+        platforms.forEach(function (platform) {
+          platform.position.x += 8;
+        });
+        genericObjects.forEach(function (genericObjects) {
+          genericObjects.position.x += 4.5;
+        });
+        backgroundObject.forEach(function (backgroundObject) {
+          backgroundObject.position.x += 3.5;
+        });
+        skyObject.forEach(function (skyObject) {
+          skyObject.position.x += 1;
+        });
+        cloudsObject.forEach(function (cloudsObject) {
+          cloudsObject.position.x += 1.5;
+        });
+        farCloudsObject.forEach(function (farCloudsObject) {
+          farCloudsObject.position.x += 1;
+        });
+      }
+    } // Kolizja z platformą od góry i boków
+
+
+    platforms.forEach(function (platform) {
+      if (player.position.y + player.height <= platform.position.y && player.position.y + player.height + player.velocity.y >= platform.position.y && player.position.x + player.width >= platform.position.x && player.position.x <= platform.position.x + platform.width) {
+        player.velocity.y = 0;
+      }
+    }); // Kolizja z platformą od dołu i boków
+
+    platforms.forEach(function (platform) {
+      if (player.position.y >= platform.position.y && player.position.y + player.velocity.y <= platform.position.y + platform.height && player.position.x + player.width >= platform.position.x && player.position.x <= platform.position.x + platform.width) {
+        player.velocity.y = 5;
+      }
+    });
+
+    if (scrollOffset > 3000) {
+      console.log('Wygrałeś !!!');
+    } else if (scrollOffset < -100) {
+      console.log('Zmień kierunek !!!');
     }
-  } // Kolizja z platformą od góry i boków
-
-
-  platforms.forEach(function (platform) {
-    if (player.position.y + player.height <= platform.position.y && player.position.y + player.height + player.velocity.y >= platform.position.y && player.position.x + player.width >= platform.position.x && player.position.x <= platform.position.x + platform.width) {
-      player.velocity.y = 0;
-    }
-  }); // Kolizja z platformą od dołu i boków
-
-  platforms.forEach(function (platform) {
-    if (player.position.y >= platform.position.y && player.position.y + player.velocity.y <= platform.position.y + platform.height && player.position.x + player.width >= platform.position.x && player.position.x <= platform.position.x + platform.width) {
-      player.velocity.y = 5;
-    }
-  });
-
-  if (scrollOffset > 3000) {
-    console.log('Wygrałeś !!!');
-  } else if (scrollOffset < -100) {
-    console.log('Zmień kierunek !!!');
-  }
+  }, 1000 / framesPerSecond);
 }
 
 animate(); // Obsługa klawiszy sterujących
